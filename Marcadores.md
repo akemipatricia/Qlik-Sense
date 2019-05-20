@@ -18,8 +18,9 @@ Neste exemplo, o campo de mês está em português o que dificulta quando utiliz
   if(month(now())-1=11,'Novembro',  \
   if(month(now())-1=12,'Dezembro'))))))))))))*
     
-    
-Teste colocar estes campos no filtro e selecionar utilizando as seguintes funções, lembrando que é necessário repetir o *"=[Ano]={expressão aqui}"*. \
+Entendo que o uso do *if* pode não ser a melhor opção, mas para uma situação de emergência funcionou. Estou aberta a outras sugestões :)
+
+Coloque os campos [Ano] e [Mês] no filtro e selecione utilizando as seguintes funções, lembrando que é necessário repetir o *"=[Ano]={expressão aqui}"*. \
 Exemplo:
 
 > [Ano]={"=Right([Ano],11) =  year(now()) & ' - ' & year(now())"} \
