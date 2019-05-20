@@ -1,3 +1,5 @@
+**Criar filtros fixos quando abrir o Painel.**
+
 Formato da variável que indica o ano: "ABC 2019 - 2019" \
 Formato da variável que indica o mês: "Abril" (nome dos meses em português)
 
