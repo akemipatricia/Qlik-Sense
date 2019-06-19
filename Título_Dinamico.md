@@ -13,7 +13,7 @@ Neste exemplo foram utilizadas dois campos, o de Ano e o de UF. Para aplicar no 
 >            (' - ' & GetFieldSelections(**[UF]**)))), \
 >        (if(GetFieldSelections(**[Ano]**)>0, \
 >        	(' - ' & GetFieldSelections(**[Ano]**)), \
->            ''))) \
+>            ''))) 
         
 **Resultado:** \
 No final, supondo que tenha sido selecionado a UF de DF com o ano de 2019 o resultado do título seria: 
