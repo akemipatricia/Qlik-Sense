@@ -23,5 +23,5 @@ No final, supondo que tenha sido selecionado a UF de DF com o ano de 2019 o resu
 *Média de carros por metro quadrado - DF, 2019*. 
 
 O título *default*, sem nenhuma seleção de UF ou Ano, é: \
-*Média de carros por metro quadrado - DF, 2019*
+*Média de carros por metro quadrado*
   
