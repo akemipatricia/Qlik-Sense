@@ -1,0 +1,6 @@
+Convert decimal number to time (hours).
+
+
+declare @hora decimal(5,2);
+set @hora = 95.75
+select replace(cast(convert(decimal(10,2),cast(@hora as int)+(((@hora-cast(@hora as int))*.60))) as varchar),'.',':')
