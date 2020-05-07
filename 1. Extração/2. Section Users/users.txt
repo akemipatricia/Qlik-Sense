@@ -1,0 +1,23 @@
+[Users]:
+SELECT "ID", 
+	"UserId", 
+	"UserDirectory", 
+	"Name", 
+	"RolesString", 
+	"Inactive", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"RemovedExternally", 
+	"Blacklisted", 
+	"DeleteProhibited" 
+FROM "public"."Users";
+
+
+store Users into [$(vExtracao)/Users.qvd];
+Drop Table [Users];
+
+
+
+
+

@@ -1,0 +1,13 @@
+[Streams]:
+SELECT "ID", 
+	"Name", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"Owner_ID" 
+FROM "public"."Streams";
+
+
+
+store Streams into [$(vExtracao)/Streams.qvd];
+Drop Table [Streams];
