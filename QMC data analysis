@@ -1,0 +1,105 @@
+EXTRAÇÃO 
+
+
+[Users]:
+SELECT "ID", 
+	"UserId", 
+	"UserDirectory", 
+	"Name", 
+	"RolesString", 
+	"Inactive", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"RemovedExternally", 
+	"Blacklisted", 
+	"DeleteProhibited" 
+FROM "public"."Users";
+
+
+store Users into [$(vExtracao)/Users.qvd];
+Drop Table [Users];
+
+
+
+[Apps]:
+SELECT "ID", 
+	"Name", 
+	"AppId", 
+	"PublishTime", 
+	"Published", 
+	"Description", 
+	"LastReloadTime", 
+	"Thumbnail", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"Owner_ID", 
+	"Stream_ID", 
+	"SavedInProductVersion", 
+	"MigrationHash", 
+	"DynamicColor", 
+	"SourceAppId", 
+	"TargetAppId" 
+FROM "public"."Apps";
+
+
+
+store Apps into [$(vExtracao)/Apps.qvd];
+Drop Table [Apps];
+
+
+
+
+[AppObjects]:
+SELECT "ID", 
+	"EngineObjectType", 
+	"Attributes", 
+	"ObjectType", 
+	"PublishTime", 
+	"Published", 
+	"Approved", 
+	"SourceObject", 
+	"Name", 
+	"EngineObjectId", 
+	"ContentHash", 
+	"Size", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"App_ID", 
+	"File_ID", 
+	"Owner_ID", 
+	"DraftObject", 
+	"Description", 
+	"AppObjectBlobId" 
+FROM "public"."AppObjects";
+
+
+
+store AppObjects into [$(vExtracao)/AppObjects.qvd];
+Drop Table [AppObjects];
+
+
+
+[Streams]:
+SELECT "ID", 
+	"Name", 
+	"CreatedDate", 
+	"ModifiedDate", 
+	"ModifiedByUserName", 
+	"Owner_ID" 
+FROM "public"."Streams";
+
+
+
+store Streams into [$(vExtracao)/Streams.qvd];
+Drop Table [Streams];
+
+
+
+
+
+
+
+
