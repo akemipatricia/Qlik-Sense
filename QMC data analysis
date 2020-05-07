@@ -1,105 +1,114 @@
-EXTRAÇÃO 
-
+------------------------------------------------------------------
+EXTRAÇÃO
 
 [Users]:
-SELECT "ID", 
-	"UserId", 
-	"UserDirectory", 
-	"Name", 
-	"RolesString", 
-	"Inactive", 
-	"CreatedDate", 
-	"ModifiedDate", 
-	"ModifiedByUserName", 
-	"RemovedExternally", 
-	"Blacklisted", 
-	"DeleteProhibited" 
+SELECT *
 FROM "public"."Users";
-
 
 store Users into [$(vExtracao)/Users.qvd];
 Drop Table [Users];
 
 
-
 [Apps]:
-SELECT "ID", 
-	"Name", 
-	"AppId", 
-	"PublishTime", 
-	"Published", 
-	"Description", 
-	"LastReloadTime", 
-	"Thumbnail", 
-	"CreatedDate", 
-	"ModifiedDate", 
-	"ModifiedByUserName", 
-	"Owner_ID", 
-	"Stream_ID", 
-	"SavedInProductVersion", 
-	"MigrationHash", 
-	"DynamicColor", 
-	"SourceAppId", 
-	"TargetAppId" 
+SELECT *
 FROM "public"."Apps";
-
-
 
 store Apps into [$(vExtracao)/Apps.qvd];
 Drop Table [Apps];
 
 
-
-
 [AppObjects]:
-SELECT "ID", 
-	"EngineObjectType", 
-	"Attributes", 
-	"ObjectType", 
-	"PublishTime", 
-	"Published", 
-	"Approved", 
-	"SourceObject", 
-	"Name", 
-	"EngineObjectId", 
-	"ContentHash", 
-	"Size", 
-	"CreatedDate", 
-	"ModifiedDate", 
-	"ModifiedByUserName", 
-	"App_ID", 
-	"File_ID", 
-	"Owner_ID", 
-	"DraftObject", 
-	"Description", 
-	"AppObjectBlobId" 
+SELECT *
 FROM "public"."AppObjects";
-
-
 
 store AppObjects into [$(vExtracao)/AppObjects.qvd];
 Drop Table [AppObjects];
 
 
-
 [Streams]:
-SELECT "ID", 
-	"Name", 
-	"CreatedDate", 
-	"ModifiedDate", 
-	"ModifiedByUserName", 
-	"Owner_ID" 
+SELECT *
 FROM "public"."Streams";
-
-
 
 store Streams into [$(vExtracao)/Streams.qvd];
 Drop Table [Streams];
 
 
+------------------------------------------------------------------
+TRANSFORMAÇÃO
+
+[Apps]:
+LOAD
+    ID																							as [%ID - Apps],
+    Name																						as [Name - Apps],
+    IF(WildMatch(UPPER(Name),'TESTE','TREINAMENTO','AULA')>0,'Sim','Não')						as [App teste - Apps], // para saber se é só uma aplicação teste do usuário
+    AppId																						as [AppId - Apps],
+    PublishTime																					as [PublishTime - Apps],
+    Published																					as [Published - Apps],
+    Description																					as [Description - Apps],
+    LastReloadTime																				as [LastReloadTime - Apps],
+    Thumbnail																					as [Thumbnail - Apps],
+    date(CreatedDate,'DD/MM/YYYY')																as [CreatedDate - Apps],
+    date(CreatedDate,'YYYY') & '/' & date(CreatedDate,'MM')										as [Mês/Ano - Apps],
+    interval(DATE(today(),'DD/MM/YYYY')-DATE(CreatedDate,'DD/MM/YYYY'),'D')						as [Idade app em dias - Apps],
+    MONTH(CreatedDate)																			as [Mes_CreatedDate - Apps],
+    year(CreatedDate)																			as [Ano_CreatedDate - Apps],
+    DATE(ModifiedDate,'DD/MM/YYYY')																as [ModifiedDate - Apps],
+    month(ModifiedDate)																			as [Mes_ModifiedDate - Apps],
+    ModifiedByUserName																			as [ModifiedByUserName - Apps],
+    Owner_ID																					as [%ID - Users],
+    Owner_ID,
+    Stream_ID																					as [%ID - Streams],
+    SavedInProductVersion																		as [SavedInProductVersion - Apps],
+    MigrationHash																				as [MigrationHash - Apps],
+    DynamicColor																				as [DynamicColor - Apps],
+    SourceAppId																					as [SourceAppId - Apps],
+    TargetAppId																					as [TargetAppId - Apps]
+FROM [$(vExtracao)/Apps.qvd]
+(qvd);
+
+store Apps into [$(vTransformacao)/Apps.qvd];
 
 
+[Users]:
+LOAD
+    ID																							as [%ID - Users],
+    "UserId"																					as [UserId - Users],
+    if(match(left(TRIM(UserDirectory),2),'SB','IN')>0,'NA',left(TRIM(UserDirectory),2))			as [UF - Users],
+    UserDirectory																				as [UserDirectory - Users],
+    Name																						as [Name - Users],
+    RolesString																					as [RolesString - Users],
+    Inactive																					as [Inactive - Users],
+    DATE(CreatedDate,'DD/MM/YYYY')			 													as [CreatedDate - Users],
+    month(CreatedDate)						 													as [Mes_CreatedDate - Users],
+    date(CreatedDate,'YYYY') & '/' & date(CreatedDate,'MM')										as [Mês/Ano - Users],
+    DATE(ModifiedDate,'DD/MM/YYYY')																as [ModifiedDate - Users],
+    month(ModifiedDate)																			as [Mes_ModifiedDate - Users],
+    ModifiedByUserName																			as [ModifiedByUserName - Users],
+    RemovedExternally																			as [RemovedExternally - Users],
+    Blacklisted																					as [Blacklisted - Users],
+    DeleteProhibited																			as [DeleteProhibited - Users]
+FROM [$(vExtracao)/Users.qvd]
+(qvd)
+;
+
+left Join
+
+load [%ID - Users],
+if(exists(Owner_ID,[%ID - Users]),'Sim','Não') 													as [Usuario dev]
+Resident Users;
+
+store Users into [$(vTransformacao)/Users.qvd];
 
 
+[Streams]:
+LOAD
+    ID																		as [%ID - Streams],
+    Name																	as [Name - Streams],
+    Date(CreatedDate,'DD/MM/YYYY')											as [CreatedDate - Streams],
+    date(ModifiedDate,'DD/MM/YYYY')											as [ModifiedDate - Streams],
+    date(ModifiedByUserName,'DD/MM/YYYY')									as [ModifiedByUserName - Streams],
+    Owner_ID																as [Owner_ID - Streams]
+FROM [$(vExtracao)/Streams.qvd]
+(qvd);
 
-
+store Streams into [$(vTransformacao)/Streams.qvd];
