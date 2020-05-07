@@ -1,0 +1,1 @@
+vTransformacao = 'lib://Dados (sbrw12capp100_usr.qlik)/SenseIntegration/QVD/Transformação';

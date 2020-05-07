@@ -1,0 +1,9 @@
+LOAD
+    "%ID - Streams",
+    "Name - Streams",
+    "CreatedDate - Streams",
+    "ModifiedDate - Streams",
+    "ModifiedByUserName - Streams",
+    "Owner_ID - Streams"
+FROM [$(vTransformacao)/Streams.qvd]
+(qvd);

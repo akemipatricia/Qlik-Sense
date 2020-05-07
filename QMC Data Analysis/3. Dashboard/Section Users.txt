@@ -1,0 +1,21 @@
+LOAD
+    "%ID - Users",
+    "UserId - Users",
+    "UF - Users",
+    "UF - Users"						as REDUCAO,
+    "UserDirectory - Users",
+    "Name - Users",
+    "RolesString - Users",
+    "Inactive - Users",
+    "CreatedDate - Users",
+    "Mes_CreatedDate - Users",
+    "ModifiedDate - Users",
+    "Mes_ModifiedDate - Users",
+    "ModifiedByUserName - Users",
+    "RemovedExternally - Users",
+    "Blacklisted - Users",
+    "DeleteProhibited - Users",
+    "Usuario dev",
+    [Mês/Ano - Users]
+FROM [$(vTransformacao)/Users.qvd]
+(qvd);

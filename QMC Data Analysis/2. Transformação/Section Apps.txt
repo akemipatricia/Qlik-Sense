@@ -1,0 +1,31 @@
+[Apps]:
+LOAD
+    ID																							as [%ID - Apps],
+    Name																						as [Name - Apps],
+    IF(WildMatch(UPPER(Name),'TESTE','TREINAMENTO','AULA')>0,'Sim','Não')						as [App teste - Apps], // para saber se é só uma aplicação teste do usuário
+    AppId																						as [AppId - Apps],
+    PublishTime																					as [PublishTime - Apps],
+    Published																					as [Published - Apps],
+    Description																					as [Description - Apps],
+    LastReloadTime																				as [LastReloadTime - Apps],
+    Thumbnail																					as [Thumbnail - Apps],
+    date(CreatedDate,'DD/MM/YYYY')																as [CreatedDate - Apps],
+    date(CreatedDate,'YYYY') & '/' & date(CreatedDate,'MM')										as [Mês/Ano - Apps],
+    interval(DATE(today(),'DD/MM/YYYY')-DATE(CreatedDate,'DD/MM/YYYY'),'D')						as [Idade app em dias - Apps],
+    MONTH(CreatedDate)																			as [Mes_CreatedDate - Apps],
+    year(CreatedDate)																			as [Ano_CreatedDate - Apps],
+    DATE(ModifiedDate,'DD/MM/YYYY')																as [ModifiedDate - Apps],
+    month(ModifiedDate)																			as [Mes_ModifiedDate - Apps],
+    ModifiedByUserName																			as [ModifiedByUserName - Apps],
+    Owner_ID																					as [%ID - Users],
+    Owner_ID,
+    Stream_ID																					as [%ID - Streams],
+    SavedInProductVersion																		as [SavedInProductVersion - Apps],
+    MigrationHash																				as [MigrationHash - Apps],
+    DynamicColor																				as [DynamicColor - Apps],
+    SourceAppId																					as [SourceAppId - Apps],
+    TargetAppId																					as [TargetAppId - Apps]
+FROM [$(vExtracao)/Apps.qvd]
+(qvd);
+
+store Apps into [$(vTransformacao)/Apps.qvd];

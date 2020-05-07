@@ -1,0 +1,29 @@
+[Users]:
+LOAD
+    ID																							as [%ID - Users],
+    "UserId"																					as [UserId - Users],
+    if(match(left(TRIM(UserDirectory),2),'SB','IN')>0,'NA',left(TRIM(UserDirectory),2))			as [UF - Users],
+    UserDirectory																				as [UserDirectory - Users],
+    Name																						as [Name - Users],
+    RolesString																					as [RolesString - Users],
+    Inactive																					as [Inactive - Users],
+    DATE(CreatedDate,'DD/MM/YYYY')			 													as [CreatedDate - Users],
+    month(CreatedDate)						 													as [Mes_CreatedDate - Users],
+    date(CreatedDate,'YYYY') & '/' & date(CreatedDate,'MM')										as [Mês/Ano - Users],
+    DATE(ModifiedDate,'DD/MM/YYYY')																as [ModifiedDate - Users],
+    month(ModifiedDate)																			as [Mes_ModifiedDate - Users],
+    ModifiedByUserName																			as [ModifiedByUserName - Users],
+    RemovedExternally																			as [RemovedExternally - Users],
+    Blacklisted																					as [Blacklisted - Users],
+    DeleteProhibited																			as [DeleteProhibited - Users]
+FROM [$(vExtracao)/Users.qvd]
+(qvd)
+;
+
+left Join
+
+load [%ID - Users],
+if(exists(Owner_ID,[%ID - Users]),'Sim','Não') 													as [Usuario dev]
+Resident Users;
+
+store Users into [$(vTransformacao)/Users.qvd];

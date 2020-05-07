@@ -1,0 +1,29 @@
+LOAD
+    "%ID - Apps",
+    "Name - Apps",
+    "App teste - Apps",
+    "AppId - Apps",
+    "PublishTime - Apps",
+    "Published - Apps",
+    "Description - Apps",
+    "LastReloadTime - Apps",
+    "Thumbnail - Apps",
+    "CreatedDate - Apps",
+    "Idade app em dias - Apps",
+    "Mes_CreatedDate - Apps",
+    "ModifiedDate - Apps",
+    "Mes_ModifiedDate - Apps",
+    "ModifiedByUserName - Apps",
+    "%ID - Users",
+    Owner_ID,
+    "%ID - Streams",
+    "SavedInProductVersion - Apps",
+    "MigrationHash - Apps",
+    "DynamicColor - Apps",
+    "SourceAppId - Apps",
+    "TargetAppId - Apps",
+    [Mês/Ano - Apps],
+    [Ano_CreatedDate - Apps]
+//     [hour_ModifiedDate - Apps]
+FROM [$(vTransformacao)/Apps.qvd]
+(qvd);

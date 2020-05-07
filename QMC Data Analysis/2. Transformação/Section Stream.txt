@@ -1,0 +1,12 @@
+[Streams]:
+LOAD
+    ID																		as [%ID - Streams],
+    Name																	as [Name - Streams],
+    Date(CreatedDate,'DD/MM/YYYY')											as [CreatedDate - Streams],
+    date(ModifiedDate,'DD/MM/YYYY')											as [ModifiedDate - Streams],
+    date(ModifiedByUserName,'DD/MM/YYYY')									as [ModifiedByUserName - Streams],
+    Owner_ID																as [Owner_ID - Streams]
+FROM [$(vExtracao)/Streams.qvd]
+(qvd);
+
+store Streams into [$(vTransformacao)/Streams.qvd];
