@@ -24,7 +24,7 @@ Coloque os campos [Ano] e [Mês] no filtro e selecione utilizando as seguintes f
 Exemplo:
 
 > [Ano]={"=Right([Ano],11) =  year(now()) & ' - ' & year(now())"} \
-> [Mês]={"=[Mês]=$(vMesAnterior)"}>}
+> [Mês]={"=[Mês]=$(vMesAnterior)"}
 
 Depois fazer as seleções no filtro, vá para "Marcadores" > "Criar novo marcardor".
 Ao final, a expressão abaixo representará o seu marcador.
