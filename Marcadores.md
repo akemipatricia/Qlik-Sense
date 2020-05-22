@@ -6,7 +6,7 @@ Formato da variável que indica o mês: "Abril" (nome dos meses em português)
 Neste exemplo, o campo de mês está em português o que dificulta quando utiliza a função *monthname*. Então, foi criado a seguinte variável com o nome *vMesAnterior*: 
 
   *if(month(now())-1=1,'Janeiro', \
-	if(month(now())-1=2,'Fevereiro', \ 
+  if(month(now())-1=2,'Fevereiro', \ 
   if(month(now())-1=3,'Março',  \
   if(month(now())-1=4,'Abril',  \
   if(month(now())-1=5,'Maio',  \
