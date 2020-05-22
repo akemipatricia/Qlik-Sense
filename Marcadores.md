@@ -30,4 +30,4 @@ Depois fazer as seleções no filtro, vá para "Marcadores" > "Criar novo marcar
 Ao final, a expressão abaixo representará o seu marcador.
 
 > {<[Ano]={"=Right([Ano],11) =  year(now()) & ' - ' & year(now())"}, \
-> [Mês]={"=[Mês]=$(vMesAnterior)"}>}
+> [Mês]={"=[Mês]=$(vMesAnterior)"}
